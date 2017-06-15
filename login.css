@@ -1,0 +1,132 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+body {
+  background: lightblue;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.register {
+  width: 400px;
+  margin: 16px auto;
+  font-size: 16px;
+}
+
+/* Reset top and bottom margins from certain elements */
+.contact-header,
+.contact p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.register-header {
+  background: gray;
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.register-container {
+  background: #dee3e4;
+  padding: 12px;
+}
+
+/* Every row inside .register-container is defined with p tags */
+.register p {
+  padding: 12px;
+}
+
+.register input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+select {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+
+/* Text fields' focus effect */
+.register input[type="email"]:focus,
+.register input[type="password"]:focus {
+  border-color: #c0cdd0;
+}
+
+.register div{
+	text-align: center;
+	margin-bottom: 8px;
+}
+
+.register input[type="radio"]{
+	display: inline;
+	width: auto;
+}
+
+.register input[type="submit"] {
+  background: gray;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.register input[type="submit"]:hover {
+  background: #17c;
+}
+
+/* Buttons' focus effect */
+.register input[type="submit"]:focus {
+  border-color: #05a;
+}
+
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+#usrExisting {
+	color: red;
+    margin-left: 9px;
+	font-style: italic;
+}
+
+#invCredentials {
+	color: red;
+    font-style: italic;
+    display: inline-block;
+    margin-top: 6px;
+}
+
+input[type=date]::-webkit-inner-spin-button, 
+input[type=date]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: gray;
+}
+
+

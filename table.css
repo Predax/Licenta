@@ -1,0 +1,168 @@
+
+body {
+    background-color: lightblue;
+	margin: 0;
+	
+	
+}
+.container2 {
+	width: 70%;
+	margin: 0 auto;
+    font-family: sans-serif;
+}
+
+.release-header {
+  background: gray;
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* Table Base */
+
+table {
+ 
+  max-width: 100%;
+  background-color: lightblue;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.table { 
+  width: 100%;
+  margin-bottom: 20px;
+  border: solid 2px gray;
+}
+
+.table th,
+.table td {
+  font-weight: normal;
+  font-size: 15px;
+  padding: 11px 15px;
+  line-height: 14px;
+  text-align: left;
+  border: none;
+}
+.table thead th {
+  background: gray;
+}   
+.table tbody > tr:nth-child(odd) > td {
+  background-color: rgba(250, 250, 250, 0.62);
+}    
+.table .t-small {
+  width: 4%;
+}
+.table .t-medium {
+  width: 15%;
+}
+.table .t-status {
+  font-weight: bold;
+}
+.table .t-active {
+  color: #46a546;
+}
+.table .t-inactive {
+  color: #e00300;
+}
+.table .t-draft {
+  color: #f89406;
+}
+.table .t-scheduled {
+  color: #049cdb;
+}
+
+/* Small Sizes */
+@media (max-width: 480px) { 
+  .table-action thead {
+    display: none;
+  }
+  .table-action tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  .table-action td {
+    border: 0;
+  }
+  .table-action td:not(:first-child) {
+    display: block;
+  }
+}
+
+#delBtn {
+  box-sizing: border-box;
+  display: block;
+  width: 50%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+  margin-left: 25%;
+  margin-bottom: 5%;
+}
+
+input[type="submit"] {
+  background: gray;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background: #17c;
+}
+
+/* Buttons' focus effect */
+input[type="submit"]:focus {
+  border-color: #05a;
+}
+
+.table img {
+	height: 15px;
+	width: 15px;
+}
+
+#rejBtn {
+  box-sizing: border-box;
+  display: block;
+  width: 25%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+  margin-left: 25%;
+  margin-bottom: 5%;
+}
+
+#appBtn {
+  box-sizing: border-box;
+  display: block;
+  width: 25%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+  margin-left: 12%;
+  margin-bottom: 5%;
+}
+
+#divider {
+ display: flex;
+}
+
+#noReq {
+  margin-top: 20%;
+  border-radius: 40px;
+  font-size: 30px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

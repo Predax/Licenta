@@ -1,0 +1,346 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+@font-face {
+   font-family: myFirstFont;
+   src: url(FortunateDEMO.otf);
+}
+
+body {
+    background-color: lightblue;
+	margin: 0;
+	
+}
+.container {
+	width: 90%;
+	margin: 0 auto;
+}
+
+header {
+	background: gray;
+}
+
+header::after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.logo {
+    width:300px;
+	height: 80px;
+	float: left;
+	padding: 3px 0;
+}
+
+nav {
+	float: right;
+}
+
+nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+nav li {
+	display: inline-block;
+	margin-left: 48px;
+	padding-top: 35px;
+	position: relative;
+}
+
+nav a {
+	color: lightblue;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 20px;
+}
+
+nav a:hover {
+	color: black; 
+}
+
+nav a::before {
+	content: '';
+	display: block;
+	height: 5px;
+	width: 0%;
+	background-color: black;
+	position: absolute;
+	top: 7%;
+	transition: all ease-in-out 350ms;
+}
+
+nav a:hover::before{
+	width: 100%;
+}
+
+textarea {
+    resize: none;
+	height: 270px;
+}
+
+.information {
+  width: 500px;
+  margin: 17px auto;
+  font-size: 18px;
+}
+
+
+.information-header {
+  background: gray;
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.information input, textarea {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+.information button[type="submit"] {
+  background: gray;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  margin-top: 2%;
+}
+
+.information button[type="submit"]:hover {
+  background: #17c;
+}
+
+/* Buttons' focus effect */
+.information button[type="submit"]:focus {
+  border-color: #05a;
+}
+
+.information li {
+  color: gray; /* bullet color */
+  font-size: 30px;
+  margin-left: 7%;
+  margin-top: 2%;
+}
+.information li span {
+  color: gray; /* text color */
+  font-size: 30px; 
+  font-family: myFirstFont;
+}
+
+.profile {
+  width: 600px;
+  margin: 17px auto;
+  margin-top: 1%;
+  border-radius: 25px;
+  border: 2px solid gray;
+  padding: 20px;
+  font-size: 18px;
+}
+
+.profile img {
+    border-radius: 10px;
+    width: 150px;
+    height: 170px;
+	background: red;
+	display: inline;
+}
+
+.profile::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#profilePicture {
+	margin-top: 3%;
+	margin-left: 5%;
+	float: left;
+}
+
+.profile span {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 25px;
+	color: gray;
+	padding: 15px;
+	margin-left: 3%;
+}
+
+.profile input {
+	box-sizing: border-box;
+	border-width: 1px;
+    border: 1px solid gray;
+	font-family: inherit;
+    font-size: 1.2em;
+	float: right;
+	height: 40px;
+}
+
+input[type="file"] {
+	float: left;
+	border: none;
+	margin-left: 5%;
+	color: gray;
+	font-size: 1.1em;
+}
+
+input[type="submit"] {
+  background: gray;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background: #17c;
+}
+
+/* Buttons' focus effect */
+input[type="submit"]:focus {
+  border-color: #05a;
+}
+
+.schedule {
+  width: 60%;
+  margin: 17px auto;
+  margin-top: 1%;
+  border-radius: 25px;
+  border: 2px solid gray;
+  padding: 20px;
+  font-size: 18px;
+}
+
+.schedule span {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 30px;
+	color: gray;
+	padding: 15px;
+	margin-left: 7%;
+}
+
+.schedule input {
+	box-sizing: border-box;
+	border-width: 1px;
+    border: 1px solid gray;
+	font-family: inherit;
+    font-size: 1.3em;
+	width: 250px;
+	height: 40px;
+	float: right;
+    margin-right: 20%;
+}
+
+select {
+	box-sizing: border-box;
+	border-width: 1px;
+    border: 1px solid gray;
+	font-family: inherit;
+    font-size: 1.3em;
+	width: 250px;
+	height: 40px;
+	float: right;
+    margin-right: 20%;
+}
+
+#scheduleBtn {
+    width: 525px;
+    margin-top: 1%;
+}
+
+input[type=date]::-webkit-inner-spin-button, 
+input[type=date]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: gray;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.management {
+    width: 600px;
+    margin: 17px auto;
+    margin-top: 8%;
+    border-radius: 25px;
+    border: 2px solid gray;
+    padding: 56px;
+}
+
+.management img {
+    border-radius: 10px;
+    width: 196px;
+    height: 201px;
+    margin-left: 11%;
+}
+
+#removeImage {
+    height: 177px;
+    width: 190px;
+}
+
+#visit {
+	width: 70%;
+}
+
+.userArea {
+	font-size: 30px;
+    color: gray;
+    text-align: center;
+    margin-top: 1%;
+    font-family: cursive;
+    font-style: italic;
+	cursor: context-menu;
+	transition: 500ms;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#userDisplay:hover {
+	color: black;  
+	text-decoration: underline;
+	transition: 300ms;
+}
+
+#logoutBtn {
+	margin-top: 2%;
+	margin-left: 3%;
+	width: 30px;
+	height: 33px;
+	border: 1px solid gray;
+}
+
+#logoutBtn:hover {
+	border: 1px solid lightblue;
+    border-radius: 10px;
+	transition: 300ms;
+}
+
+#total {
+	background-color: gainsboro;
+}
+
+
+
+
