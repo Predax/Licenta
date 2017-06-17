@@ -341,6 +341,19 @@ input[type=number]::-webkit-outer-spin-button {
 	background-color: gainsboro;
 }
 
+#dialog-message-success {
+	display: none;
+}
 
+#dialog-message-fail {
+	display: none;
+}
 
+#dialog-message-checker {
+	display: none;
+}
+
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}
 
