@@ -2,7 +2,7 @@
 
 $_roleAdmin = "admin";
 $_roleClient = "client";
-
+$_defaultAccount = "0000000000000000"
 
 
 ?>

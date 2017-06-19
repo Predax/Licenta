@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'OwnFunctions.php';
 $nowFormat = date('Y-m-d', strtotime("1 day"));
 if ($_SESSION["isLogged"] == true) {
 	include 'Connection.php';
@@ -19,22 +20,30 @@ if ($_SESSION["isLogged"] == true) {
 		$ot = $_POST["other"];
 		$tot = $_POST["total"];
 		$resourceCheckerU = true;
+		$moneyCheckerU = true;
 		$sqlTotalResource = "Select * from date_resource where Schedule_date ='" . $d . "'";
 		$sqlServiceResource = "Select * from services where Service_name ='" . $serv . "'";
 		$sqlCountyResource = "Select Resource from county where Name ='" . $co . "'";
+		$sqlMoney = "Select * from accounts where Username_id = '" . $_SESSION["id"] . "'"; 
 		$resultTotalResource= $conn->query($sqlTotalResource);
 		$resultServiceResource = $conn->query($sqlServiceResource);
 		$resultCountyResource = $conn->query($sqlCountyResource);
+		$resultMoney = $conn->query($sqlMoney);
 		$rowT = $resultTotalResource->fetch_assoc();
 		$rowS = $resultServiceResource->fetch_assoc();
 		$rowC = $resultCountyResource->fetch_assoc();
-		if (($rowS["Resource"] + $rowC["Resource"]) > $rowT["Total_resource"]) {
+		$rowM = $resultMoney->fetch_assoc();
+		$varResTotal = $rowS["Resource"] + $rowC["Resource"];
+		if ( $varResTotal > $rowT["Total_resource"]) {
 			$resourceCheckerU = false;
 		}
-		if ($resourceCheckerU == true) {
+		if ($rowM["Money"] < $tot) {
+			$moneyCheckerU = false;
+		}
+		if ($resourceCheckerU == true && $moneyCheckerU == true) {
 			$stmt = $conn->prepare("Insert into requests (Username_id, Username, Service, Processing, County, CityTown, Address, Other,
-			Date, Sum_total) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			$stmt->bind_param("ssssssssss", $_SESSION["id"], $_SESSION["username"], $service, $processing, $county, $city, $address, $other, $date, $total);
+			Date, Sum_total, Resource) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			$stmt->bind_param("sssssssssss", $_SESSION["id"], $_SESSION["username"], $service, $processing, $county, $city, $address, $other, $date, $total, $resTotal);
 			$service = $serv;
 			$processing = $proc;
 			$county = $co;
@@ -43,8 +52,12 @@ if ($_SESSION["isLogged"] == true) {
 			$other = $ot;
 			$date = $d;
 			$total = $tot;
+			$resTotal = $varResTotal;
 			if ($stmt->execute() == true) {
 				$inserted = true;
+				$newValue = $rowM["Money"] - $total;
+				$sqlTransferMoney = "Update accounts SET Money = '" . $newValue . "' Where Username_id = '" . $_SESSION["id"] . "'";
+				$resultTransferMoney = $conn->query($sqlTransferMoney);
 			} else {
 				$inserted = false;
 			}	
@@ -54,8 +67,6 @@ if ($_SESSION["isLogged"] == true) {
 	$newURL = "http://localhost/deton/login.php";
 	header('Location: '.$newURL);	
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -76,6 +87,8 @@ if ($_SESSION["isLogged"] == true) {
 $(document).ready(function(){ 
     var previous;
 	var name;
+	name = $("#service").find('option:selected').text();
+	document.cookie = "nameS="+name;
     $("#service").focus(function () {
         // Store the current value on focus, before it changes
         previous =  parseInt($(this).val(), 10);
@@ -98,6 +111,9 @@ $(document).ready(function(){
 <script>
 $(document).ready(function(){ 
     var previous;
+	var name;
+	name = $("#processing").find('option:selected').text();
+	document.cookie = "nameP="+name;
     $("#processing").focus(function () {
         previous =  parseInt($(this).val(), 10);
 		name = $(this).find('option:selected').text();
@@ -117,6 +133,9 @@ $(document).ready(function(){
 <script>
 $(document).ready(function(){ 
     var previous;
+	var name;
+	name = $("#county").find('option:selected').text();
+	document.cookie = "nameC="+name;
     $("#county").focus(function () {
         previous =  parseInt($(this).val(), 10);
 		name = $(this).find('option:selected').text();
@@ -133,9 +152,7 @@ $(document).ready(function(){
     });
 })();
 </script>
-
 <?php 
-include 'OwnFunctions.php';
 if ($_SESSION["role"] == $_roleClient) {
 	include_once 'Navbar.php'; ?>
 	<div class="container">
@@ -222,6 +239,22 @@ if ($_SESSION["role"] == $_roleClient) {
 						});
 					  } );  
 					</script> 
+				<?php } else if (isset($moneyCheckerU) && $moneyCheckerU == false) { include 'ResourceUser.php'; ?>
+				<script>
+					  $( function() {
+						$( "#dialog-message-money" ).dialog({
+						  modal: true,
+						  width: 500,
+						  dialogClass: "no-close",
+						  buttons: {
+							Ok: function() {
+							  $( this ).dialog( "close" );
+							  window.location.replace("http://localhost/deton/Profile.php");
+							}
+						  }
+						});
+					  } );  
+					</script> 
 				<?php } ?>
 			</form>	
 		</div>
@@ -232,8 +265,7 @@ if ($_SESSION["role"] == $_roleClient) {
 	<h2 class="release-header">Visits history</h2>
 	<form action="" method="post">
 	<!-- TABLE -->
-	<table class="table table-action">
-	  
+	<table class="table table-action">  
 	  <thead>
 		<tr>
 		  <th class="t-small"></th>
@@ -244,16 +276,12 @@ if ($_SESSION["role"] == $_roleClient) {
 		  <th class="t-small">Status</th>
 		</tr>
 	  </thead>
-	  
 	  <tbody>
-
-		
 	  </tbody>
 	</table>
 	<!-- END TABLE -->
 	<input type="submit" value="Delete" name="del" id="delBtn" />
 	</form>
-
 <?php } ?>
 </div>
 </body>

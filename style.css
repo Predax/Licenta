@@ -143,7 +143,7 @@ textarea {
 }
 
 .profile {
-  width: 600px;
+  width: 715px;
   margin: 17px auto;
   margin-top: 1%;
   border-radius: 25px;
@@ -154,9 +154,8 @@ textarea {
 
 .profile img {
     border-radius: 10px;
-    width: 150px;
-    height: 170px;
-	background: red;
+    width: 212px;
+    height: 272px;
 	display: inline;
 }
 
@@ -167,9 +166,9 @@ textarea {
 }
 
 #profilePicture {
-	margin-top: 3%;
-	margin-left: 5%;
-	float: left;
+    margin-top: 2%;
+    margin-left: 5%;
+    float: left;
 }
 
 .profile span {
@@ -350,6 +349,14 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 #dialog-message-checker {
+	display: none;
+}
+
+#dialog-message-profile {
+	display: none;
+}
+
+#dialog-message-money {
 	display: none;
 }
 
