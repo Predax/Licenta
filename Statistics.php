@@ -2,13 +2,12 @@
 session_start();
 if ($_SESSION["isLogged"] == true) {
 	include 'Connection.php';
-	$sqlTotalC = "SELECT COUNT(*) AS TOTALC FROM convicts";
+	$sqlTotalMoney = "SELECT Money FROM accounts WHERE Username_id ='" . $_SESSION["id"] . "'";
 	$sqlTotalU = "SELECT COUNT(*) AS TOTALU FROM users";
-	$sqlTotalV = "SELECT COUNT(*) AS TOTALV FROM visit WHERE Status = 'Y'";
+	$sqlTotalRequests = "SELECT COUNT(*) AS TOTALV FROM requests WHERE Status = 'Y'";
 	$sqlTotalM = "SELECT COUNT(*) AS TOTALM FROM messages";
-	$sqlTotalVU = "SELECT COUNT(*) AS TOTALVU FROM visit WHERE Status = 'Y' AND Username_id = '" . $_SESSION["id"] . "'";
-	$sqlLastV = "SELECT MAX(Visit_date) AS LASTV FROM visit WHERE Status = 'Y' and Username_id ='" . $_SESSION["id"] . "'";
-	$sqlTotalR = "SELECT COUNT(*) AS TOTALR FROM visit WHERE Username_id = '" . $_SESSION["id"] . "'";
+	$sqlLastV = "SELECT MAX(Date) AS LASTV FROM requests WHERE Status = 'Y' and Username_id ='" . $_SESSION["id"] . "'";
+	$sqlTotalR = "SELECT COUNT(*) AS TOTALR FROM requests WHERE Username_id = '" . $_SESSION["id"] . "'";
 	$sqlTotalMU = "SELECT COUNT(*) AS TOTALMU FROM messages WHERE Username = '" . $_SESSION["username"] . "'";
 } else {
 	$newURL = "http://localhost/deton/login.php";
@@ -31,23 +30,23 @@ if ($_SESSION["role"] == $_roleClient)
 {
 	include_once 'Navbar.php';	?>
 <div class="statContainer">
-	<a class="nounderline"  title="Total Visits">
+	<a class="nounderline"  title="My money">
 	<div class="statBubbleContainer">
 	<div class="statBubble">
 	  <div class="statNum">
-	  #<?php
-			$result = $conn->query($sqlTotalVU);
+	  <?php
+			$result = $conn->query($sqlTotalMoney);
 			$data=$result->fetch_assoc();
-			echo $data["TOTALVU"];
+			echo $data["Money"];
 	  ?>
 	  </div>
 	</div>
-	  <h3>Number of visits</h3>
+	  <h3>Total Balance</h3>
 	</div>
 	</a>
 
 
-	<a class="nounderline" title="Closest date">
+	<a class="nounderline" title="Closest date until an approved request">
 	<div class="statBubbleContainer">
 	<div class="statBubble">
 	  <div class="statNum">
@@ -58,7 +57,7 @@ if ($_SESSION["role"] == $_roleClient)
 			$sqlDif = "select datediff('" . $nowFormat . "', '" . $data['LASTV'] . "') AS DAYS;";
 			$result2=$conn->query($sqlDif);
 			$data2=$result2->fetch_assoc();
-			echo $data2["DAYS"];
+			echo abs($data2["DAYS"]);
 	  ?>
 	  </div>
 	</div>
@@ -100,22 +99,21 @@ if ($_SESSION["role"] == $_roleClient)
 </div>
 	
 <?php
-} else if ($_SESSION["role"] == $_roleAdmin)
-{
+} else if ($_SESSION["role"] == $_roleAdmin) {
 include_once 'NavbarAdm.php'; ?>
 <div class="statContainer">
-	<a class="nounderline"  title="Total Convicts">
+	<a class="nounderline"  title="My money">
 	<div class="statBubbleContainer">
 	<div class="statBubble">
 	  <div class="statNum">
-	  #<?php
-			$result = $conn->query($sqlTotalC);
-			$data=$result->fetch_assoc();
-			echo $data["TOTALC"];
+	  <?php
+			$result = $conn->query($sqlTotalMoney);
+			$data = $result->fetch_assoc();
+			echo $data["Money"];
 	  ?>
 	  </div>
 	</div>
-	  <h3>Number of convicts</h3>
+	  <h3>Total Balance</h3>
 	</div>
 	</a>
 
@@ -135,18 +133,18 @@ include_once 'NavbarAdm.php'; ?>
 	</div>
 	</a>
 	  
-	<a class="nounderline" title="Total visits">
+	<a class="nounderline" title="Total processed requests">
 	<div class="statBubbleContainer">
 	<div class="statBubble">
 	  <div class="statNum">
 	  #<?php
-			$result = $conn->query($sqlTotalV);
+			$result = $conn->query($sqlTotalRequests);
 			$data=$result->fetch_assoc();
 			echo $data["TOTALV"];
 	  ?>
 	  </div>
 	</div>
-	  <h3>Number of visits</h3>
+	  <h3>Number of requests</h3>
 	</div>
 	</a>
 	  

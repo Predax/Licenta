@@ -28,7 +28,7 @@ if(isset($_POST["subject"]) && isset($_POST["contactText"])) {
 	<meta charset="UTF-8">
 </head>
 <body>
-<?php include_once 'Navbar.php' ?>
+<?php include_once 'Navbar.php';?>
 <div class="container">
 	<div id="contactBox" class="information">
 		<h2 class="information-header">Contact Us</h2>

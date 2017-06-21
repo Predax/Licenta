@@ -63,6 +63,8 @@ if ($_SESSION["isLogged"] == true) {
 			}	
 		} 	
 	}
+	$sqlHistory = "SELECT * FROM requests WHERE status = 'Y' OR status = 'N' ORDER BY Date DESC";
+	$resultHistory = $conn->query($sqlHistory);
 } else {
 	$newURL = "http://localhost/deton/login.php";
 	header('Location: '.$newURL);	
@@ -82,7 +84,6 @@ if ($_SESSION["isLogged"] == true) {
 	<meta charset="UTF-8">
 </head>
 <body>
-
 <script>
 $(document).ready(function(){ 
     var previous;
@@ -208,7 +209,8 @@ if ($_SESSION["role"] == $_roleClient) {
 						});
 					  } );  
 					</script> 
-				<?php } else if (isset($inserted) && $inserted == true) { include 'Success.php'; ?>
+				<?php } else if (isset($inserted) && $inserted == true) { include 'Success.php';
+				include 'PHPMailer-master/test.php';?>
 					<script>
 					  $( function() {
 						$( "#dialog-message-success" ).dialog({
@@ -262,26 +264,48 @@ if ($_SESSION["role"] == $_roleClient) {
 <?php } else if ($_SESSION["role"] == $_roleAdmin) {
 	include_once 'NavbarAdm.php'; ?>
 	<div class="container2">
-	<h2 class="release-header">Visits history</h2>
-	<form action="" method="post">
+	<h2 class="release-header">Requests history</h2>
+	
 	<!-- TABLE -->
 	<table class="table table-action">  
 	  <thead>
 		<tr>
+		  <th class="t-little">Username</th>
+		  <th class="t-medium">Service</th>
+		  <th class="t-little">Processing</th>
+		  <th class="t-little">County</th>
+		  <th class="t-medium">City</th>
+		  <th class="t-medium">Address</th>
+		  <th class="t-little">Total</th>
+		  <th class="t-medium">Date</th>
 		  <th class="t-small"></th>
-		  <th class="t-medium">Username</th>
-		  <th class="t-medium">Convict Name</th>
-		  <th class="t-small">ID</th>
-		  <th class="t-medium">Visit Date</th>
-		  <th class="t-small">Status</th>
 		</tr>
 	  </thead>
 	  <tbody>
+	  		 <?php if ($resultHistory && $resultHistory->num_rows > 0) {
+					while($row = $resultHistory->fetch_assoc()) { ?>
+					  <tr>
+						 <td><?php echo $row["Username"] ?></td>
+						 <td><?php echo $row["Service"] ?></td>
+						 <td><?php echo $row["Processing"] ?></td>
+						 <td><?php echo $row["County"] ?></td>
+						 <td><?php echo $row["CityTown"] ?></td>
+						 <td><?php echo $row["Address"] ?></td>
+						 <td><?php echo $row["Sum_total"] ?></td>
+						 <td><?php echo $row["Date"] ?></td>
+						 <td><?php if ($row["Status"] == "Y") { ?> <img src="img/check.png" alt="Y"> 
+						 <?php } else if ($row["Status"] == "N") { ?>  <img src="img/uncheck.png" alt="N">
+						 <?php } else if ($row["Status"] == "P") { ?> <img src="img/pending.png" alt="P">
+						 <?php } ?></td>
+					  </tr>
+				 <?php
+						}
+					}
+				 ?>
 	  </tbody>
 	</table>
 	<!-- END TABLE -->
-	<input type="submit" value="Delete" name="del" id="delBtn" />
-	</form>
+
 <?php } ?>
 </div>
 </body>

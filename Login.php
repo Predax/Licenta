@@ -10,6 +10,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])) {
 			$_SESSION["isLogged"] = true;
 			$_SESSION["id"] = $row["Id"];
 			$_SESSION["username"] = $row["Username"];
+			$_SESSION["email"] = $row["Email"];
 			if ($row["Role"] == "ADM")
 			{
 				$_SESSION["role"] = "admin";

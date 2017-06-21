@@ -68,7 +68,7 @@ if ($_SESSION["isLogged"] == true) {
 			} else {
 				$updateAccount = false;
 			}
-			if ($mon >= 10)
+			if (isset($mon) && $mon >= 10)
 			{
 				$total = $sumAccount + $mon;
 				$stmt = $conn->prepare("UPDATE accounts SET Money = ? WHERE Username_id = ?");

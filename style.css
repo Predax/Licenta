@@ -360,6 +360,22 @@ input[type=number]::-webkit-outer-spin-button {
 	display: none;
 }
 
+#dialog-message-accept {
+	display: none;
+}
+
+#dialog-message-reject {
+	display: none;
+}
+
+#dialog-message-noreq {
+	display: none;
+}
+
+#dialog-message-cancel {
+	display: none;
+}
+
 .no-close .ui-dialog-titlebar-close {
   display: none;
 }
