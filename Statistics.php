@@ -18,7 +18,7 @@ if ($_SESSION["isLogged"] == true) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Statistics</title>
+	<title>Info</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" type="text/css" href="stats.css">
 	<meta charset="UTF-8">
@@ -44,8 +44,6 @@ if ($_SESSION["role"] == $_roleClient)
 	  <h3>Total Balance</h3>
 	</div>
 	</a>
-
-
 	<a class="nounderline" title="Closest date until an approved request">
 	<div class="statBubbleContainer">
 	<div class="statBubble">
@@ -64,7 +62,6 @@ if ($_SESSION["role"] == $_roleClient)
 	  <h3>Closest date - days</h3>
 	</div>
 	</a>
-	  
 	<a class="nounderline" title="Total requests">
 	<div class="statBubbleContainer">
 	<div class="statBubble">
@@ -79,7 +76,6 @@ if ($_SESSION["role"] == $_roleClient)
 	  <h3>Number of requests</h3>
 	</div>
 	</a>
-	
 	<a class="nounderline" title="Total sent">
 	<div class="statBubbleContainer">
 	<div class="statBubble">
@@ -132,10 +128,9 @@ include_once 'NavbarAdm.php'; ?>
 	  <h3>Number of users</h3>
 	</div>
 	</a>
-	  
 	<a class="nounderline" title="Total processed requests">
 	<div class="statBubbleContainer">
-	<div class="statBubble">
+	<div class="statBubble" onclick=details()>
 	  <div class="statNum">
 	  #<?php
 			$result = $conn->query($sqlTotalRequests);
@@ -165,7 +160,11 @@ include_once 'NavbarAdm.php'; ?>
 </div>
 <?php }
 ?>
-
+<script>
+function details() {
+    window.open("Services.php", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=400,width=700,height=500");
+}
+</script>
 
 
 </body>

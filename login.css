@@ -106,7 +106,7 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0; 
 }
 
-#usrExisting {
+.validateField {
 	color: red;
     margin-left: 9px;
 	font-style: italic;
@@ -129,4 +129,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: gray;
 }
 
+#dialog-message-transferNo {
+	display: none;
+}
 
+#dialog-message-transferYes {
+	display: none;
+}
+
+#dialog-message-resourceAdd {
+	display: none;
+}
