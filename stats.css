@@ -1,4 +1,6 @@
-
+/*
+This class is updated. It is also specified in the refferences of the licence. 
+*/
 .statContainer {
   margin:auto;
   width:960px;
@@ -37,7 +39,6 @@
 
 .statBubbleContainer:hover > .statBubble {
   border:6px solid #0e76bc;
-  background-position:center -140px;
 }
 
 .statBubbleContainer:hover .statNum {
@@ -76,4 +77,14 @@
   -o-transition:all 0.3s ease-in-out;
   -apple-transition:all 0.3s ease-in-out;
   transition:all 0.3s ease-in-out;
+}
+
+.manageItem {
+	margin: auto;
+    width: 150px;
+    height: 150px;
+    border: 6px solid #ddd;
+    position: relative;
+    text-align: center;
+	cursor: pointer;
 }

@@ -45,8 +45,8 @@ if ($_SESSION["isLogged"] == true) {
 						 <td><label><input name="num[]" type="checkbox" value="<?php echo $row['Message_id'];?>"></form></label></td>
 						 <td id= "sper"><?php echo $row["Message_id"] ?></td>
 						 <td><?php echo $row["Username"] ?></td>
-						 <td><?php echo $row["Subject"] ?></td>
-						 <td><?php echo $row["Content"] ?></td>
+						 <td><?php echo htmlspecialchars($row["Subject"]) ?></td>
+						 <td><?php echo htmlspecialchars($row["Content"]) ?></td>
 						 <td><?php echo $row["Date_reception"] ?></td>
 					  </tr>
 				 <?php

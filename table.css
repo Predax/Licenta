@@ -1,4 +1,6 @@
-
+/*
+This class is updated. Is also specified in the refferences of the licence. 
+*/
 body {
     background-color: lightblue;
 	margin: 0;
@@ -168,4 +170,21 @@ input[type="submit"]:focus {
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+#dialog-message-resourceAdd {
+	display: none;
+}
+
+#profilePicture {
+    height: 50px;
+    width: 50px;
+}
+
+#dialog-message-transferNo {
+	display: none;
+}
+
+#dialog-message-transferYes {
+	display: none;
 }

@@ -10,9 +10,11 @@ if ($_SESSION["isLogged"] == true) {
 	$rowAccount = $resultAccount->fetch_assoc();
 	$sumAccount = $rowAccount["Money"];
 	if (isset($_POST["submit"])) {
+		if ($_FILES['fileToUpload']['name'] != "") {
 		move_uploaded_file($_FILES['fileToUpload']['tmp_name'], "profile/".$_FILES['fileToUpload']['name']);
 		$sqlPicture = "UPDATE users SET Image = '" . $_FILES['fileToUpload']['name'] . "' WHERE Username = '" . $_SESSION["username"] . "'";
-		$resultPicture = $conn->query($sqlPicture);
+		$resultPicture = $conn->query($sqlPicture); 
+		}
 		$change = false;
 		$deposit= false;
 		$first = $_POST["firstname"];

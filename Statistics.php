@@ -1,10 +1,13 @@
 <?php
+/*
+This class is updated. It is also specified in the refferences of the licence. 
+*/
 session_start();
 if ($_SESSION["isLogged"] == true) {
 	include 'Connection.php';
 	$sqlTotalMoney = "SELECT Money FROM accounts WHERE Username_id ='" . $_SESSION["id"] . "'";
 	$sqlTotalU = "SELECT COUNT(*) AS TOTALU FROM users";
-	$sqlTotalRequests = "SELECT COUNT(*) AS TOTALV FROM requests WHERE Status = 'Y'";
+	$sqlTotalRequests = "SELECT COUNT(*) AS TOTALV FROM requests";
 	$sqlTotalM = "SELECT COUNT(*) AS TOTALM FROM messages";
 	$sqlLastV = "SELECT MAX(Date) AS LASTV FROM requests WHERE Status = 'Y' and Username_id ='" . $_SESSION["id"] . "'";
 	$sqlTotalR = "SELECT COUNT(*) AS TOTALR FROM requests WHERE Username_id = '" . $_SESSION["id"] . "'";

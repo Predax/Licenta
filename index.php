@@ -93,8 +93,8 @@ if ($_SESSION["role"] == $_roleClient) {
 						 <td><?php echo $row["Service"] ?></td>
 						 <td><?php echo $row["Processing"] ?></td>
 						 <td><?php echo $row["County"] ?></td>
-						 <td><?php echo $row["CityTown"] ?></td>
-						 <td><?php echo $row["Address"] ?></td>
+						 <td><?php echo htmlspecialchars($row["CityTown"]) ?></td>
+						 <td><?php echo htmlspecialchars($row["Address"]) ?></td>
 						 <td><?php echo $row["Sum_total"] ?></td>
 						 <td><?php echo $row["Date"] ?></td>
 						 <td><?php if ($row["Status"] == "Y") { ?> <img src="img/check.png" alt="Y"> 
@@ -127,7 +127,8 @@ if ($_SESSION["role"] == $_roleClient) {
 					$rowAccounts = $resultAccounts->fetch_assoc();
 					$currentBalance = $rowAccounts["Money"];
 					$total = $currentBalance + $rowRequest["Sum_total"] - 150;
-					$sqlNewTotal = "UPDATE accounts SET Money ='" . $total . "' WHERE Username_id = '" . $rowRequest["Username_id"] . "'";
+					$sqlNewTotal = "UPDATE accounts SET Money ='" . $total . "' WHERE Username_id = '" 
+					. $rowRequest["Username_id"] . "'";
 					if ($conn->query($sqlNewTotal) === TRUE) {
 						$cancelRequest = true; 
 					} else { 
@@ -137,10 +138,10 @@ if ($_SESSION["role"] == $_roleClient) {
 				echo "Error deleting record: " . $conn->error;
 			}
 		} 
+	}
 		?>
-</div>
+	</div>
 		<?php
-		}
 	if (isset($cancelRequest) && $cancelRequest == true) { include 'ResourceUser.php'; ?>
 		<script>
 		  $( function() {
@@ -197,6 +198,7 @@ if ($_SESSION["role"] == $_roleClient) {
 		  <th class="t-medium">Address</th>
 		  <th class="t-little">Total</th>
 		  <th class="t-medium">Date</th>
+		  <th class="t-small">Resources</th>
 		</tr>
 	  </thead> 
 	  <tbody>
@@ -208,10 +210,11 @@ if ($_SESSION["role"] == $_roleClient) {
 						 <td><?php echo $row["Service"] ?></td>
 						 <td><?php echo $row["Processing"] ?></td>
 						 <td><?php echo $row["County"] ?></td>
-						 <td><?php echo $row["CityTown"] ?></td>
-						 <td><?php echo $row["Address"] ?></td>
+						 <td><?php echo htmlspecialchars($row["CityTown"]) ?></td>
+						 <td><?php echo htmlspecialchars($row["Address"]) ?></td>
 						 <td><?php echo $row["Sum_total"] ?></td>
 						 <td><?php echo $row["Date"] ?></td>
+						 <td><?php echo $row["Resource"] ?></td>
 					  </tr>
 				 <?php
 						}
@@ -262,7 +265,8 @@ if ($_SESSION["role"] == $_roleClient) {
 					$sql="UPDATE requests SET Status = 'Y' WHERE Request_id = '" . $val . "'";
 					if ($conn->query($sql) === TRUE) {
 						$newResource = $rowResource["Total_resource"] - $rowRequest["Resource"];
-						$sqlUpdateResource = "UPDATE date_resource SET Total_resource = '" . $newResource . "' WHERE Schedule_date = '" . $rowRequest["Date"] . "'";
+						$sqlUpdateResource = "UPDATE date_resource SET Total_resource = '" . $newResource . "' WHERE Schedule_date = '" . 
+						$rowRequest["Date"] . "'";
 						if ($conn->query($sqlUpdateResource) === TRUE) {
 							$sqlAccounts = "SELECT * FROM accounts WHERE Username_id = '" . $_SESSION["id"] . "'"; 
 							$resultAccounts = $conn->query($sqlAccounts);

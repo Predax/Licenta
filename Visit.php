@@ -1,4 +1,7 @@
 <?php
+/*
+This class contains jQuery. Is also specified in the refferences of the licence. 
+*/
 session_start();
 include 'OwnFunctions.php';
 $nowFormat = date('Y-m-d', strtotime("1 day"));
@@ -265,7 +268,6 @@ if ($_SESSION["role"] == $_roleClient) {
 	include_once 'NavbarAdm.php'; ?>
 	<div class="container2">
 	<h2 class="release-header">Requests history</h2>
-	
 	<!-- TABLE -->
 	<table class="table table-action">  
 	  <thead>
@@ -289,8 +291,8 @@ if ($_SESSION["role"] == $_roleClient) {
 						 <td><?php echo $row["Service"] ?></td>
 						 <td><?php echo $row["Processing"] ?></td>
 						 <td><?php echo $row["County"] ?></td>
-						 <td><?php echo $row["CityTown"] ?></td>
-						 <td><?php echo $row["Address"] ?></td>
+						 <td><?php echo htmlspecialchars($row["CityTown"]) ?></td>
+						 <td><?php echo htmlspecialchars($row["Address"]) ?></td>
 						 <td><?php echo $row["Sum_total"] ?></td>
 						 <td><?php echo $row["Date"] ?></td>
 						 <td><?php if ($row["Status"] == "Y") { ?> <img src="img/check.png" alt="Y"> 
