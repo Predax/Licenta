@@ -18,6 +18,11 @@ if ($_SESSION["isLogged"] == true) {
 }
 ?>
 
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
